@@ -13,55 +13,68 @@
     }
 </style>
 <body>
-    <div class="flex flex-col justify-center items-center gap-2 mt-44">
-        <div class="flex flex-col justify-center items-center gap-5 select-none">
-            <div class="w-full px-3 sm:w-96">
-                <img id="animationImage" class="w-full h-full object-contain" src="Image/gift.gif" alt="Animation">
-            </div>
+    <div class="flex flex-col justify-center items-center gap-5 h-screen select-none">
+        <div class="w-full px-3 sm:w-96">
+            <img id="animationImage" class="w-full h-full object-contain" src="Image/gift.gif" alt="Animation">
+        </div>
+        <div class="text-center space-y-2">
             <h1 id="text" class="text-center text-pink-700 text-2xl font-bold italic">Clickety click the gift!</h1>
-            <div class="flex gap-10">
-                <button id="yesBtn" class="hidden bg-pink-500 text-white font-semibold px-6 py-2 rounded shadow-xl">Yes</button>
-                <button id="btn" class="hidden bg-pink-500 text-white font-semibold px-6 py-2 rounded shadow-xl">No</button>
-            </div>
+        <p id="fullDate" class="text-pink-400 font-semibold"></p>
+        <p id="text2" class="hidden text-pink-400 font-semibold">Stick with me till the end, will you?</p>
+        </div>
+        <div class="flex gap-10">
+            <button id="yesBtn" class="hidden bg-pink-500 text-white font-semibold px-6 py-2 rounded shadow-xl hover:bg-pink-600 transition-colors duration-100">Yes</button>
+            <button id="noBtn" class="hidden bg-pink-500 text-white font-semibold px-6 py-2 rounded shadow-xl">No</button>
         </div>
     </div>
 
     <script>
         let yesBtn = document.getElementById('yesBtn');
-        let btn = document.getElementById('btn');
+        let noBtn = document.getElementById('noBtn');
         let text = document.getElementById('text');
+        let text2 = document.getElementById('text2');
+        let fullDate = document.getElementById('fullDate');
         let animationImage = document.getElementById('animationImage');
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
         animationImage.addEventListener('click', () => {
-            document.body.style.background = 'rgb(239, 239, 239)';
+            document.body.style.background = 'rgb(255, 255, 255)';
             animationImage.src = 'Image/ana.gif';
             text.textContent = 'Will you be my Lover?';
             yesBtn.style.display = 'block';
-            btn.style.display = 'block';
+            noBtn.style.display = 'block';
 
         })
 
-        btn.addEventListener('click', () => {
-            btn.style.position = 'absolute';
+        noBtn.addEventListener('mouseover', () => {
+            noBtn.style.position = 'absolute';
             // Get the window dimensions
             let windowWidth = window.innerWidth;
             let windowHeight = window.innerHeight;
         
             // Calculate random position for the button
-            let randomLeft = Math.random() * (windowWidth - btn.offsetWidth);
-            let randomTop = Math.random() * (windowHeight - btn.offsetHeight);
+            let randomLeft = Math.random() * (windowWidth - noBtn.offsetWidth);
+            let randomTop = Math.random() * (windowHeight - noBtn.offsetHeight);
         
             // Set the button's position
-            btn.style.left = randomLeft + 'px';
-            btn.style.top = randomTop + 'px';
+            noBtn.style.left = randomLeft + 'px';
+            noBtn.style.top = randomTop + 'px';
         });     
         
         yesBtn.addEventListener('click', () => {
+            const setDate = new Date();
             // Change the image source
+            document.body.style.background = 'rgb(239, 239, 239)';
             animationImage.src = 'Image/dancing.gif';
-            text.textContent = "Woohoo! Let's make it happen!"
+            text.textContent = "Woohoo! Let's make it happen!";
+            text2.style.display = 'block';
             yesBtn.style.display = 'none';
-            btn.style.display = 'none';
+            noBtn.style.display = 'none';
+            const date = setDate.getDate();
+            const monthIndex = setDate.getMonth();
+            const monthName = months[monthIndex];
+            const year = setDate.getFullYear();
+            fullDate.textContent = `Our Anni ${date} ${monthName} ${year}`;
         });
     </script>
 </body>
